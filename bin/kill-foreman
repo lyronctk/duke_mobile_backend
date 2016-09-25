@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+
+pkill redis-server
+pkill ruby
+rm -Rf tmp/pids

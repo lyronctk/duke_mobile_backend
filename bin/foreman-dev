@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+
+if [ "$RACK_ENV" = "production" ]; then
+  echo "Booting production..."
+  foreman start
+else
+  echo "Booting development..."
+  foreman start -f Procfile.dev
+fi
