@@ -8,30 +8,9 @@ module Api
         ).permit!
         user = User.new(data)
         user.password_confirmation = user.password
-        if user.save
-          render json: {
-            success: true,
-            status: 200,
-            data: {}
-          }
-        else
-          errors = []
-          user.errors.each do |attribute, message|
-            errors.push(
-              pointer: "data/#{attribute}",
-              message: "#{attribute.to_s.humanize} #{message}",
-              reason: message
-            )
-          end
-
-          render json: {
-            success: false,
-            status: 422,
-            errors: errors
-          }, status: 422
-        end
+        process_resource(user)
       end
-      
+
     end
   end
 end
