@@ -3,14 +3,10 @@ module Api
     class RegistrationsController < ApplicationController
 
       def create
-        data = params[:data].slice(
-          :first_name, :last_name, :email, :password
-        ).permit!
-        user = User.new(data)
-        user.password_confirmation = user.password
-        process_resource(user)
+        service = RegistrationService.new(params[:data])
+        service.run
+        render json: service.result, status: service.status
       end
-
     end
   end
 end

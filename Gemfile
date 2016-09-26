@@ -63,6 +63,8 @@ gem 'oj', '~> 2.17.4', platform: :mri
 # Misc
 #
 
+# ActiveModel elsewhere
+gem 'active_attr', '~> 0.9.0'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 # Simple Rails app configuration
