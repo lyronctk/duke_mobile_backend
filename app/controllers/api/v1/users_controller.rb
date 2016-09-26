@@ -1,13 +1,13 @@
 module Api
   module V1
-    class RegistrationsController < ApplicationController
+    class UsersController < ApplicationController
 
-      def create
+      def update
         data = params[:data].slice(
-          :first_name, :last_name, :email, :password
+          :email, :new_password
         ).permit!
-        user = User.new(data)
-        user.password_confirmation = user.password
+        user = User.find_by(email: data[:email])
+        user.password = data[:new_password]
         if user.save
           render json: {
             success: true,
