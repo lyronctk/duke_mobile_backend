@@ -1,0 +1,6 @@
+lyron:
+  id: 1
+  first_name: Lyron
+  last_name: Co Ting Keh
+  email: lyronctk@gmail.com
+  password_digest: <%= BCrypt::Password.create('password', cost: 4) %>

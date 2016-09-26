@@ -1,13 +1,7 @@
-RSpec.describe('/api/v1/update_password') do
-  describe 'POST' do
-    it "updates a user's password" do
-      User.create!(
-        first_name: 'Lyron',
-        last_name: 'CTK',
-        email: 'lyronctk@gmail.com',
-        password: 'xxxxxxx'
-      )
+require 'test_helper'
 
+class UpdatePasswordTest < ActionDispatch::IntegrationTest
+    test "updates a user's password" do
       request_data = {
         data: {
           email: "lyronctk@gmail.com",
@@ -33,5 +27,4 @@ RSpec.describe('/api/v1/update_password') do
       user = User.find_by(email: request_data[:data][:email])
       assert_equal user, user.authenticate('newpassword')
     end
-  end
 end

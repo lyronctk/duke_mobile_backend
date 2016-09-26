@@ -81,8 +81,6 @@ group :development, :test do
   gem 'byebug'
   # `rails c` alternative and runtime developer console
   gem 'pry-rails'
-  # Test with RSpec
-  gem 'rspec-rails'
   # Code coverage
   gem 'simplecov', require: false
   # Shows objects in nicely formatted columns for easy reading.
@@ -91,7 +89,8 @@ end
 
 group :test do
   # One-liners that test common Rails functionality
-  gem 'shoulda-matchers'
+  gem 'shoulda', '~> 3.5'
+  gem 'shoulda-matchers', '~> 2.0'
 end
 
 group :development do

@@ -60,4 +60,19 @@ class ApplicationService
       data: result_data
     }
   end
+
+  # Failured Servive Result
+  class Failure
+    def initialize(status: 422)
+    end
+  end
+
+  # Successful Service Result
+  class Success
+    def initialize
+    end
+
+    def data
+    end
+  end
 end
