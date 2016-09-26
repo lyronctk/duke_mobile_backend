@@ -88,9 +88,14 @@ group :development, :test do
 end
 
 group :test do
+  # Test::Unit context framework extracted from Shoulda
+  gem 'shoulda-context', '~> 1.2.1'
   # One-liners that test common Rails functionality
-  gem 'shoulda', '~> 3.5'
-  gem 'shoulda-matchers', '~> 2.0'
+  gem 'shoulda-matchers', '~> 3.1.1'
+  # Focus on one test at a time.
+  gem 'minitest-focus'
+  # Create customizable MiniTest output formats
+  gem 'minitest-reporters'
 end
 
 group :development do

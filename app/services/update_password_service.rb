@@ -1,3 +1,4 @@
+# Handles user password updates
 class UpdatePasswordService < ApplicationService
   include ActiveAttr::Model
   attribute :email, type: String

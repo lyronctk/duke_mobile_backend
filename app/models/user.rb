@@ -1,3 +1,4 @@
+# A user in the application
 class User < ActiveRecord::Base
   validates :email,
     presence: true,

@@ -1,3 +1,4 @@
+# Base class for services
 class ApplicationService
   include ActiveAttr::Model
 

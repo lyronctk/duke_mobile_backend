@@ -1,5 +1,6 @@
 module Api
   module V1
+    # Reponsible for handling users
     class UsersController < ApplicationController
       def update_password
         service = UpdatePasswordService.new(params[:data])

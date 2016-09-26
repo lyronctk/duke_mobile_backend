@@ -1,3 +1,4 @@
+# Handles user registration
 class RegistrationService < ApplicationService
   include ActiveAttr::Model
   attribute :first_name, type: String
