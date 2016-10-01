@@ -20,7 +20,6 @@ class RegistrationsTest < ActionDispatch::IntegrationTest
     assert_equal request_data[:data][:first_name], user.first_name
 
     expected_response = {
-      'status' => 200,
       'success' => true,
       'data' => { 'user_id' => user.id }
     }

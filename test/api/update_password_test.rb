@@ -15,7 +15,6 @@ class UpdatePasswordTest < ActionDispatch::IntegrationTest
     post api_v1_update_password_path, request_data
 
     expected_response = {
-      'status' => 200,
       'success' => true,
       'data' => {}
     }

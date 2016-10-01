@@ -6,14 +6,12 @@ class RegistrationService < ApplicationService
   attribute :email, type: String
   attribute :password, type: String
 
-  def action
+  def action # => Result
     user = User.new(attributes)
     if user.save
-      @result_data = { user_id: user.id }
-      true
+      Success.new(user_id: user.id)
     else
-      @errors = user.errors
-      false
+      Failure.new(user.errors)
     end
   end
 end

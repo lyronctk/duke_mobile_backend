@@ -3,9 +3,7 @@ module Api
     # Reponsible for handling registrations
     class RegistrationsController < ApplicationController
       def create
-        service = RegistrationService.new(params[:data])
-        service.run
-        render json: service.result, status: service.status
+        render_service RegistrationService.new(params[:data])
       end
     end
   end

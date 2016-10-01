@@ -3,9 +3,7 @@ module Api
     # Reponsible for handling users
     class UsersController < ApplicationController
       def update_password
-        service = UpdatePasswordService.new(params[:data])
-        service.run
-        render json: service.result, status: service.status
+        render_service UpdatePasswordService.new(params[:data])
       end
     end
   end

@@ -8,11 +8,9 @@ class UpdatePasswordService < ApplicationService
     user = User.find_by!(email: email)
     user.password = new_password
     if user.save
-      @result_data = {}
-      true
+      Success.new
     else
-      @errors = user.errors
-      false
+      Failure.new(user.errors)
     end
   end
 end
