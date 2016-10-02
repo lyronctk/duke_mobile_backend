@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160925214823) do
+ActiveRecord::Schema.define(version: 20161002214709) do
+
+# Could not dump table "records" because of following StandardError
+#   Unknown type 'json' for column 'data'
 
   create_table "users", force: :cascade do |t|
     t.string   "first_name",      limit: 255, null: false
@@ -22,4 +25,5 @@ ActiveRecord::Schema.define(version: 20160925214823) do
     t.datetime "updated_at",                  null: false
   end
 
+  add_foreign_key "records", "users"
 end
