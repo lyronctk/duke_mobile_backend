@@ -1,21 +1,8 @@
-require 'test_helper'
-
 class RecordTest < ActiveSupport::TestCase
-  # def setup
-  # 	request_data = {
-		# data: {
-		#   user: 1,
-		#   schema: "shape",
-		#   use_case: "survey1",
-		#   data: "{'key': 'value'}"
-		# },
-		# headers: {
-		#   content_type: 'application/json'
-		# }
-  # 	}
-  # 	post api_v1_records_path, request_data
-  # end
-  # test "creates a record" do
-
-  # end
+  should validate_presence_of(:user_id)
+  should validate_presence_of(:schema)
+  should validate_presence_of(:data)
+  should validate_presence_of(:use_case)
+  
+  should validate_uniqueness_of(:use_case)
 end

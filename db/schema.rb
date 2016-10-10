@@ -11,10 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161002214709) do
+ActiveRecord::Schema.define(version: 20161002192029) do
 
 # Could not dump table "records" because of following StandardError
-#   Unknown type 'json' for column 'data'
+#   Unknown type 'json' for column 'record_data'
 
   create_table "users", force: :cascade do |t|
     t.string   "first_name",      limit: 255, null: false

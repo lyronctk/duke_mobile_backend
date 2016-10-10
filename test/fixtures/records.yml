@@ -4,10 +4,10 @@ one:
   user_id: 
   schema: MyString
   use_case: MyString
-  data: 
+  record_data: 
 
 two:
   user_id: 
   schema: MyString
   use_case: MyString
-  data: 
+  record_data: 
