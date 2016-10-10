@@ -1,5 +1,5 @@
 class Record < ActiveRecord::Base
-  # belongs_to :user
+  belongs_to :user
 
   validates :use_case,
     presence: true,
