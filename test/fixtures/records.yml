@@ -1,13 +1,8 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  user_id: 
-  schema: MyString
-  use_case: MyString
-  record_data: 
-
-two:
-  user_id: 
-  schema: MyString
-  use_case: MyString
-  record_data: 
+# testRecord:
+#   id: 123
+#   user_id: 2
+#   schema: circle
+#   use_case: thisusecase
+#   record_data: '{}'
