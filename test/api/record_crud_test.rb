@@ -4,7 +4,7 @@ class RecordCrudTest < ActionDispatch::IntegrationTest
   test "creates record" do
   	record_data = {
   		data: {
-  		  user_id: 1,
+  		  user_id: 2,
   		  schema: "shape",
   		  use_case: "survey1",
   		  record_data: "{'key': 'value'}"
@@ -40,9 +40,9 @@ class RecordCrudTest < ActionDispatch::IntegrationTest
     }
     patch api_v1_records_path, request_data
     assert_response :success
-    record = Record.find_by(id: request_data[:record_id])
-    assert_not_nil record
-    assert_equal record[:schema], request_data[:new_info][:schema]
+    record = Record.find_by(id: request_data[:data][:record_id])
+    # assert_not_nil record
+    assert_equal record[:schema], request_data[:data][:new_info][:schema]
   end
 
   test "deletes record" do
@@ -56,7 +56,7 @@ class RecordCrudTest < ActionDispatch::IntegrationTest
   	}
   	delete api_v1_records_path, request_data
   	assert_response :success
-  	assert_nil Record.find_by(id: @record_id)
+  	assert_nil Record.find_by(id: request_data[:data][:record_id])
   end
 
   # test "reads single record" do
