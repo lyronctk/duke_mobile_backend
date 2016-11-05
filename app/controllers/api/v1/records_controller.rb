@@ -2,23 +2,27 @@ module Api
   module V1
     class RecordsController < ApplicationController
        def create
-        render json: :nothing
+        render_service CreateRecordService.new(params[:data])
        end
 
        def index
-        render json: :nothing
+        render json: '[]'
+       end
+
+       def filter_records
+        render json: '[]'
        end
 
        def show
-        render json: :nothing
+        render json: '[]'
        end
 
        def update
-        render json: :nothing
+        render json: '[]'
        end
 
        def destroy
-        render json: :nothing
+        render json: '[]'
        end
     end
   end

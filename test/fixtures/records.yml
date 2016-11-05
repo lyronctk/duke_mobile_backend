@@ -1,8 +1,28 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-testRecord:
-  id: 123
-  user_id: 1
-  schema: circle
-  use_case: thisusecase
-  record_data: '{}'
+<% for i in 110..114 %>
+  testRecord:
+    id: <%= i %>
+    user_id: 1
+    schema: circle
+    use_case: firstusecase
+    record_data: <%= {"question1"=>"answer1", "question2"=>"answer2"}.to_json.inspect %>
+<% end %>
+
+<% for i in 115..118 %>
+  testRecord:
+    id: <%= i %>
+    user_id: 3
+    schema: circle
+    use_case: secondusecase
+    record_data: <%= {"question1"=>"answer1", "question2"=>"answer2"}.to_json.inspect %>
+<% end %>
+
+<% for i in 119..123 %>
+  testRecord:
+    id: <%= i %>
+    user_id: 1
+    schema: circle
+    use_case: secondusecase
+    record_data: <%= {"question1"=>"answer1", "question2"=>"answer2"}.to_json.inspect %>
+<% end %>
