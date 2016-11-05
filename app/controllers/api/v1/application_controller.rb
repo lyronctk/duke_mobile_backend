@@ -6,8 +6,8 @@ module Api
 
       private
 
-      def render_service(service)
-        result = service.run
+      def render_service(service, request_info={})
+        result = service.run(request_info)
         render json: result.to_h, status: result.status
       end
     end

@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class RecordCrudTest < ActionDispatch::IntegrationTest
-  focus
+
   test "POST /record" do
     record_attrs = {
       "user_id" => 1,
@@ -29,10 +29,8 @@ class RecordCrudTest < ActionDispatch::IntegrationTest
     assert_equal 'application/json', response.content_type
     assert_equal(expected_response, JSON.parse(response.body))
   end
-
+  focus  
   test "PATCH /record/:id" do
-    record = Record.find_by(id: 123)
-    assert_not_nil record
     request_data = {
       data: {
         schema: "newshape"  
@@ -41,9 +39,12 @@ class RecordCrudTest < ActionDispatch::IntegrationTest
         content_type: 'application/json'
       }
     }
-    put api_v1_record_path(record), request_data
+    put api_v1_record_path(123), request_data
+
     assert_response :success
-    assert_equal record[:schema], request_data[:data][:schema]
+    record = Record.find_by(id: 123)
+    assert_not_nil record
+    assert_equal request_data[:data][:schema], record[:schema]
   end
 
   test "DELETE /record/:id" do

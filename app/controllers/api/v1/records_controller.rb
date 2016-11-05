@@ -18,7 +18,8 @@ module Api
        end
 
        def update
-        render json: '[]'
+        # @record = Record.find_by(id: params[:id])
+        render_service UpdateRecordService.new(params[:data]), {record_id: params[:id]}
        end
 
        def destroy
