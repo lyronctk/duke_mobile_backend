@@ -6,24 +6,24 @@ module Api
        end
 
        def index
-        render json: '[]'
+        render_service GetAllRecordsService.new()
        end
 
        def filter_records
-        render json: '[]'
+        render_service GetFilteredRecordsService.new(params[:data])
        end
 
        def show
-        render json: '[]'
+        render_service GetRecordService.new(), record_id: params[:id]
        end
 
        def update
         # @record = Record.find_by(id: params[:id])
-        render_service UpdateRecordService.new(params[:data]), {record_id: params[:id]}
+        render_service UpdateRecordService.new(params[:data]), record_id: params[:id]
        end
 
        def destroy
-        render json: '[]'
+        render_service DeleteRecordService.new(), record_id: params[:id]
        end
     end
   end
