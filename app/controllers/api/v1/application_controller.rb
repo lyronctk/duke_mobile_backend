@@ -6,8 +6,30 @@ module Api
 
       private
 
-      def render_service(service, request_info={})
-        result = service.run(request_info)
+      rescue_from ActiveRecord::RecordNotFound do
+        render json: {
+          success: false,
+          errors: [{
+            pointer: 'path/id',
+            message: 'Not found',
+            reason: 'Could not find resource with provided id'
+          }]
+        }, status: 404
+      end
+
+      # rescue_from Exception do
+      #   render json: {
+      #     success: false,
+      #     errors: [{
+      #       pointer: 'server',
+      #       message: 'Something went wrong',
+      #       reason: 'Server error. Please contact the adminisrtator'
+      #     }]
+      #   }, status: 500
+      # end
+
+      def render_service(service)
+        result = service.run
         render json: result.to_h, status: result.status
       end
     end

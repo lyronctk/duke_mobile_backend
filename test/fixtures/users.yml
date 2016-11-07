@@ -1,6 +1,11 @@
 lyron:
-  id: 1
   first_name: Lyron
   last_name: Co Ting Keh
   email: lyronctk@gmail.com
+  password_digest: <%= BCrypt::Password.create('password', cost: 4) %>
+
+faraz:
+  first_name: Faraz
+  last_name: Yashar
+  email: faraz.yasha@gmail.com
   password_digest: <%= BCrypt::Password.create('password', cost: 4) %>

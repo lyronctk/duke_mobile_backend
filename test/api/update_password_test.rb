@@ -2,17 +2,10 @@ require 'test_helper'
 
 class UpdatePasswordTest < ActionDispatch::IntegrationTest
   test "updates a user's password" do
-    request_data = {
-      data: {
-        email: "lyronctk@gmail.com",
-        new_password: "newpassword"
-      },
-      headers: {
-        content_type: 'application/json'
-      }
-    }
-
-    post api_v1_update_password_path, request_data
+    post api_v1_update_password_path, json_request_data(
+      email: "lyronctk@gmail.com",
+      new_password: "newpassword"
+    )
 
     expected_response = {
       'success' => true,
@@ -23,7 +16,7 @@ class UpdatePasswordTest < ActionDispatch::IntegrationTest
     assert_equal 'application/json', response.content_type
     assert_equal(expected_response, JSON.parse(response.body))
 
-    user = User.find_by(email: request_data[:data][:email])
+    user = User.find_by(email: 'lyronctk@gmail.com')
     assert_equal user, user.authenticate('newpassword')
   end
 end

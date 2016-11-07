@@ -1,31 +1,21 @@
 require 'test_helper'
 
 class RegistrationsTest < ActionDispatch::IntegrationTest
+  focus
   test "creates new user and sends confirmation email" do
-    request_data = {
-      data: {
-        first_name: "Faraz",
-        last_name: "Yashar",
-        email: "faraz.yashar@gmail.com",
-        password: "verysecurepassword"
-      },
-      headers: {
-        content_type: 'application/json'
-      }
-    }
+    email = "faraz.yashar2@gmail.com"
+    last_name = "Yashar2"
 
-    post api_v1_registrations_path, request_data
+    post api_v1_registrations_path, json_request_data(
+      first_name: "Faraz",
+      last_name: last_name,
+      email: email,
+      password: "verysecurepassword"
+    )
 
-    user = User.find_by!(email: request_data[:data][:email])
-    assert_equal request_data[:data][:first_name], user.first_name
+    user = User.find_by!(email: email)
+    assert_equal last_name, user.last_name
 
-    expected_response = {
-      'success' => true,
-      'data' => { 'user_id' => user.id }
-    }
-
-    assert_response :success
-    assert_equal 'application/json', response.content_type
-    assert_equal(expected_response, JSON.parse(response.body))
+    assert_json_success(user_id: user.id)
   end
 end

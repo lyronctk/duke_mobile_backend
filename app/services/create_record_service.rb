@@ -1,9 +1,9 @@
 class CreateRecordService < ApplicationService
   include ActiveAttr::Model
-  attribute :user_id, type: Integer
-  attribute :schema, type: String
-  attribute :use_case, type: String
-  attribute :record_data, type: String
+  attribute :user_id
+  attribute :schema
+  attribute :use_case
+  attribute :record_data
 
   def action
     record = Record.new(attributes)

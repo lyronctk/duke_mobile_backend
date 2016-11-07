@@ -1,50 +1,37 @@
 require 'test_helper'
 
 class RecordCrudTest < ActionDispatch::IntegrationTest
- 
+
   test "POST /record" do
+    user = users(:lyron)
     record_attrs = {
-      "user_id" => 1,
-      "schema" => "shape",
-      "use_case" => "survey1",
-      "record_data" => {'favorite color'=>'pink'}.to_json
-    }
-    record_data = {
-      data: record_attrs,
-      headers: {
-        content_type: 'application/json'
+      user_id: user.id,
+      schema: "shape",
+      use_case: "survey1",
+      record_data: {
+        favorite_color: 'pink'
       }
     }
-    post api_v1_records_path, record_data
+    post api_v1_records_path, json_request_data(record_attrs)
 
     last_record = Record.last
-    assert_not_nil last_record
-    assert_equal record_attrs.except("record_data"), last_record.slice(:user_id, :schema, :use_case) 
 
-    expected_response = {
-      'success' => true,
-      'data' => {'record_id'=> last_record.id}
-    }
-    assert_response :success
-    assert_equal 'application/json', response.content_type
-    assert_equal(expected_response, JSON.parse(response.body))
+
+    assert_equal stringify_keys_recursively!(record_attrs),
+      last_record.slice(:user_id, :schema, :use_case, :record_data)
+
+    assert_json_success(record_id: last_record.id)
   end
 
   test "PATCH /record/:id" do
-    request_data = {
-      data: {
-        schema: "newshape"  
-      },
-      headers: {
-        content_type: 'application/json'
-      }
-    }
-    put api_v1_record_path(123), request_data
+    schema = "newshape"
+
+    put api_v1_record_path(123), json_request_data(schema: schema)
 
     assert_response :success
     record = Record.find_by(id: 123)
     assert_not_nil record
-    assert_equal request_data[:data][:schema], record[:schema]
+    assert_equal schema, record[:schema]
   end
 
   test "DELETE /record/:id" do
@@ -72,10 +59,13 @@ class RecordCrudTest < ActionDispatch::IntegrationTest
   end
 
   test "GET /records?use_case=firstusecase returns all records for use_case" do
+
     request_data = {
-      data: {
-        use_case: "secondusecase",
-        user_id: 3  
+      params: {
+        data: {
+          use_case: "secondusecase",
+          user_id: 3
+        },
       },
       headers: {
         content_type: 'application/json'

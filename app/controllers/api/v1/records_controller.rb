@@ -18,8 +18,7 @@ module Api
        end
 
        def update
-        # @record = Record.find_by(id: params[:id])
-        render_service UpdateRecordService.new(params[:data]), record_id: params[:id]
+        render_service UpdateRecordService.new(params[:data].merge(id: params[:id]))
        end
 
        def destroy

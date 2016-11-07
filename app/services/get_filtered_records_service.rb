@@ -3,19 +3,9 @@ class GetFilteredRecordsService < ApplicationService
   attribute :user_id, type: Integer
   attribute :schema, type: String
   attribute :use_case, type: String
-  attribute :record_data, type: String
 
   def action
-    begin
-      records = Record.all
-      attributes.each do |key, value|
-        if value
-          records = records.where(" #{key} = '#{value}' ")
-        end
-      end
-      Success.new(records: records)
-    rescue
-      Failure.new
-    end
+    records = Record.where(Hash[attributes.select { |_, value| value.present? }])
+    Success.new(records: records)
   end
 end
