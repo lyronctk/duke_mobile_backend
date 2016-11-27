@@ -15,8 +15,6 @@ class RecordCrudTest < ActionDispatch::IntegrationTest
     post api_v1_records_path, json_request_data(record_attrs)
 
     last_record = Record.last
-
-
     assert_equal stringify_keys_recursively!(record_attrs),
       last_record.slice(:user_id, :schema, :use_case, :record_data)
 
@@ -49,7 +47,7 @@ class RecordCrudTest < ActionDispatch::IntegrationTest
     assert_equal records(:record123).attributes, JSON.parse(response.body)["data"]["record_info"]
   end
 
-  test "GET /records returns all records" do
+  test "GET /records" do
     get api_v1_records_path
     assert_response :success
 
@@ -58,20 +56,8 @@ class RecordCrudTest < ActionDispatch::IntegrationTest
     assert_equal records(:record123).attributes, all_records.last
   end
 
-  test "GET /records?use_case=firstusecase returns all records for use_case" do
-
-    request_data = {
-      params: {
-        data: {
-          use_case: "secondusecase",
-          user_id: 3
-        },
-      },
-      headers: {
-        content_type: 'application/json'
-      }
-    }
-    get api_v1_filter_records_path, request_data
+  test "GET /records?use_case=secondusecase" do
+    get api_v1_records_path, json_request_data(use_case: "secondusecase")
     assert_response :success
 
     all_records = JSON.parse(response.body)["data"]["records"]

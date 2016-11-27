@@ -2,28 +2,28 @@
 
 record120:
   id: 120
-  user_id: 1
+  user: lyron
   schema: circle
   use_case: firstusecase
   record_data: <%= {"question1"=>"answer1", "question2"=>"answer2"}.to_json.inspect %>
 
 record121:
   id: 121
-  user_id: 3
+  user: lyron
   schema: circle
   use_case: secondusecase
   record_data: <%= {"question1"=>"answer1", "question2"=>"answer2"}.to_json.inspect %>
 
 record122:
   id: 122
-  user_id: 3
+  user: faraz
   schema: circle
   use_case: secondusecase
   record_data: <%= {"question1"=>"answer1", "question2"=>"answer2"}.to_json.inspect %>
 
 record123:
   id: 123
-  user_id: 1
+  user: faraz
   schema: circle
   use_case: fourthusecase
   record_data: <%= {"question1"=>"answer1", "question2"=>"answer2"}.to_json.inspect %>

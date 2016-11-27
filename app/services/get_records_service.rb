@@ -1,8 +1,7 @@
-class GetFilteredRecordsService < ApplicationService
+class GetRecordsService < ApplicationService
   include ActiveAttr::Model
-  attribute :user_id, type: Integer
-  attribute :schema, type: String
-  attribute :use_case, type: String
+  attribute :schema
+  attribute :use_case
 
   def action
     records = Record.where(Hash[attributes.select { |_, value| value.present? }])

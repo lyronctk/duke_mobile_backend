@@ -1,7 +1,9 @@
 class DeleteRecordService < ApplicationService
+	include ActiveAttr::Model
+	attribute :record_id
 
   def action
-    record = Record.find_by(id: request_info[:record_id])
+    record = Record.find(record_id)
     if record.delete
       Success.new
     else
