@@ -2,7 +2,9 @@ module Api
   module V1
     # Base class for the API
     class ApplicationController < ActionController::Base
-      protect_from_forgery with: :null_session
+      # protect_from_forgery with: :null_session
+      before_action :authenticate_request
+      attr_reader :current_user
 
       private
 
@@ -32,6 +34,13 @@ module Api
         result = service.run
         render json: result.to_h, status: result.status
       end
+
+      def authenticate_request
+        result = AuthorizeApiRequest.new(request.headers).run
+        @current_user = result.to_h.data.user if result.success?
+        render json: result.to_h, status: result.status unless @current_user
+      end
+
     end
   end
 end

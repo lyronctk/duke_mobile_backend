@@ -5,14 +5,13 @@ class RecordCrudTest < ActionDispatch::IntegrationTest
   test "POST /record" do
     user = users(:lyron)
     record_attrs = {
-      user_id: user.id,
       schema: "shape",
       use_case: "survey1",
       record_data: {
         favorite_color: 'pink'
       }
     }
-    post api_v1_records_path, json_request_data(record_attrs)
+    post api_v1_records_path, json_request_data(record_attrs, user)
 
     last_record = Record.last
     assert_equal stringify_keys_recursively!(record_attrs),

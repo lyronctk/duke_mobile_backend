@@ -44,6 +44,14 @@ module ActiveSupport
       assert_response :success
       assert_equal 'application/json', response.content_type
     end
+
+    def generate_token(user)
+      post api_v1_authenticate_path, json_request_data({
+        email: user.email
+        password: user.password_digest
+      })
+      JSON.decode(response.body)["token"]
+    end
   end
 end
 

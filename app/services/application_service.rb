@@ -3,7 +3,7 @@ class ApplicationService
   include ActiveAttr::Model
   attr_reader :result
 
-  def run()
+  def run
     @run = true
     @result = action
   end

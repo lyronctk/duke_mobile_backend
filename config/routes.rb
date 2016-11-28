@@ -4,6 +4,7 @@ Rails.application.routes.draw do
       resources :registrations, only: [:create]
       resources :records
       post '/update_password' => 'users#update_password'
+      post '/authenticate' => 'users#authenticate'
     end
   end
 end

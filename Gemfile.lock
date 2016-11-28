@@ -1,5 +1,5 @@
 GEM
-  remote: https://rubygems.org/
+  remote: http://rubygems.org/
   specs:
     actioncable (5.0.0.1)
       actionpack (= 5.0.0.1)
@@ -92,6 +92,7 @@ GEM
     jquery-ui-rails (5.0.5)
       railties (>= 3.2.16)
     json (1.8.3)
+    jwt (1.5.6)
     kaminari (0.17.0)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
@@ -239,6 +240,7 @@ DEPENDENCIES
   fast_blank (~> 1.0.0)
   fast_xs (~> 0.8.0)
   jquery-rails (~> 4.2.1)
+  jwt
   letter_opener
   meta_request
   minitest-focus
