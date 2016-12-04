@@ -1,6 +1,6 @@
 # Handles user registration
 class RegistrationService < ApplicationService
-  include ActiveAttr::Model
+  
   attribute :first_name
   attribute :last_name
   attribute :email

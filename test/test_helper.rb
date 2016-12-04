@@ -1,4 +1,4 @@
-   ENV['RAILS_ENV'] = 'test'
+ENV['RAILS_ENV'] = 'test'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 
@@ -22,7 +22,7 @@ module ActiveSupport
       }
     end
 
-    def auth_request_data(data, user)
+    def auth_request_data(user, data={})
       {
         params: {
           data: data

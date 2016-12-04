@@ -1,5 +1,5 @@
 class GetRecordsService < ApplicationService
-  include ActiveAttr::Model
+	
   attribute :schema
   attribute :use_case
   attribute :user

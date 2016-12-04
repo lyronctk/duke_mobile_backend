@@ -1,5 +1,5 @@
 class CreateRecordService < ApplicationService
-  include ActiveAttr::Model
+  
   attribute :schema
   attribute :use_case
   attribute :record_data

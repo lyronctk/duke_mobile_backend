@@ -6,12 +6,12 @@ class AuthorizeApiRequestService < ApplicationService
 	end
 
 	def action
-		return Failure.new(errors: {auth: 'Missing token'}) unless headers['Authorization'].present?
+		return Failure.new(auth: 'Missing token') unless headers['Authorization'].present?
 		user = User.find(decoded_auth_token[:user_id]) if decoded_auth_token
 		if user
 			Success.new user: user
 		else 
-			Failure.new(errors: {auth: 'Invalid token'})
+			Failure.new(auth: 'Invalid token')
 		end 	
 	end
 

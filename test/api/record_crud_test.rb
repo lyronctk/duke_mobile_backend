@@ -10,12 +10,12 @@ class RecordCrudTest < ActionDispatch::IntegrationTest
         favorite_color: 'pink'
       }
     }
-    post api_v1_records_path, auth_request_data(record_attrs, users(:lyron))
+    post api_v1_records_path, auth_request_data(users(:lyron), record_attrs)
 
     last_record = Record.last
     assert_equal stringify_keys_recursively!(record_attrs.merge(user: users(:lyron))),
       last_record.slice(:user, :schema, :use_case, :record_data)
-
+      
     assert_json_success(record_id: last_record.id)
   end
 
@@ -23,14 +23,14 @@ class RecordCrudTest < ActionDispatch::IntegrationTest
     schema = "newshape"
 
     #wrong user
-    put api_v1_record_path(123), auth_request_data({schema: schema}, users(:lyron))
+    put api_v1_record_path(123), auth_request_data(users(:lyron), schema: schema)
 
     record = Record.find_by(id: 123)
     assert_not_equal schema, record[:schema]
     assert_json_failure('Not authorized for access')
 
     #correct user
-    put api_v1_record_path(123), auth_request_data({schema: schema}, users(:faraz))
+    put api_v1_record_path(123), auth_request_data(users(:faraz), schema: schema)
     assert_json_success
     record = Record.find_by(id: 123)
     assert_equal schema, record[:schema]
@@ -39,25 +39,25 @@ class RecordCrudTest < ActionDispatch::IntegrationTest
   test "DELETE /record/:id" do
     record = Record.find_by(id: 123)
 
-    delete api_v1_record_path(record), auth_request_data(nil, users(:lyron))
+    delete api_v1_record_path(record), auth_request_data(users(:lyron), nil)
     assert_json_failure('Not authorized for access')
     assert_not_nil Record.find_by(id: 123)
 
-    delete api_v1_record_path(record), auth_request_data(nil, users(:faraz))
+    delete api_v1_record_path(record), auth_request_data(users(:faraz), nil)
     assert_json_success
     assert_nil Record.find_by(id: 123)
   end
 
   test "GET /records/:id" do
-    get api_v1_record_path(123), auth_request_data(nil, users(:lyron))
+    get api_v1_record_path(123), auth_request_data(users(:lyron), nil)
     assert_json_failure('Not authorized for access')
 
-    get api_v1_record_path(123), auth_request_data(nil, users(:faraz))
+    get api_v1_record_path(123), auth_request_data(users(:faraz), nil)
     assert_json_success(record_info: records(:record123).attributes)
   end
 
   test "GET /records" do
-    get api_v1_records_path, auth_request_data(nil, users(:faraz))
+    get api_v1_records_path, auth_request_data(users(:faraz), nil)
     assert_response :success
 
     all_records = JSON.parse(response.body)["data"]["records"]
@@ -66,7 +66,7 @@ class RecordCrudTest < ActionDispatch::IntegrationTest
   end
 
   test "GET /records?use_case=secondusecase" do
-    get api_v1_records_path, auth_request_data({use_case: "secondusecase"}, users(:faraz))
+    get api_v1_records_path, auth_request_data(users(:faraz), use_case: "secondusecase")
     assert_response :success
 
     all_records = JSON.parse(response.body)["data"]["records"]

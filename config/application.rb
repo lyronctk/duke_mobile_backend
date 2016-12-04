@@ -21,5 +21,10 @@ module MobileBackend
     # config.i18n.default_locale = :de
 
     config.autoload_paths << Rails.root.join('lib')
+
+    #all services
+    config.autoload_paths << Rails.root.join('app/services/auth_service')
+    config.autoload_paths << Rails.root.join('app/services/record_service')
+    config.autoload_paths << Rails.root.join('app/services/user_service')
   end
 end

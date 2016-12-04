@@ -1,5 +1,5 @@
 class AuthenticateUserService < ApplicationService
-	include ActiveAttr::Model
+	
 	attribute :email
 	attribute :password
 
@@ -7,7 +7,7 @@ class AuthenticateUserService < ApplicationService
 		if user
 			Success.new token: JsonWebToken.encode(user_id: user.id)
 		else
-			Failure.new(errors: {auth: 'Invalid credentials'})
+			Failure.new(auth: 'Invalid credentials')
 		end
 	end
 

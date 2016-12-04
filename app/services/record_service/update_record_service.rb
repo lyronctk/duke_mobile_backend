@@ -1,5 +1,5 @@
 class UpdateRecordService < ApplicationService
-  include ActiveAttr::Model
+  
   attribute :id
   attribute :schema
   attribute :use_case
@@ -8,7 +8,7 @@ class UpdateRecordService < ApplicationService
 
   def action
     record = Record.find(id)
-    return Failure.new(errors: {user: 'Not authorized for access'}) unless user == record.user
+    return Failure.new(user: 'Not authorized for access') unless user == record.user
     record.attributes = attributes.select { |key, value| value.present?}
     if record.save
       Success.new
