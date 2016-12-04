@@ -5,9 +5,10 @@ class ApplicationService
     # errors - ActiveModel::Errors that occurred
     # options - The Hash options used to describe the error
     #           :status - The Integer HTTP status code for the response
-    def initialize(errors = ActiveModel::Errors.new(nil), status: 422)
+    def initialize(errors:{}, status: 422)
+      errors = ActiveModel::Errors.new(errors) if !errors.is_a?(ActiveModel::Errors) 
       @errors = errors
-      @status = status
+      @status = status  
     end
 
     def to_h

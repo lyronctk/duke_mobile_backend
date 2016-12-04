@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class RegistrationsTest < ActionDispatch::IntegrationTest
-  focus
+
   test "creates new user and sends confirmation email" do
     email = "faraz.yashar2@gmail.com"
     last_name = "Yashar2"

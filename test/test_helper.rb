@@ -1,4 +1,4 @@
-  ENV['RAILS_ENV'] = 'test'
+   ENV['RAILS_ENV'] = 'test'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 
@@ -22,6 +22,18 @@ module ActiveSupport
       }
     end
 
+    def auth_request_data(data, user)
+      {
+        params: {
+          data: data
+        },
+        headers: {
+          content_type: 'application/json',
+          Authorization: generate_token(user)
+        }
+      }
+    end
+
     def stringify_keys_recursively!(input)
       case input
       when Array
@@ -33,24 +45,30 @@ module ActiveSupport
       input
     end
 
-    def assert_json_success(expected_data)
+    def assert_json_success(expected_data={})
       expected_response = {
         success: true,
         data: expected_data
       }
 
       stringify_keys_recursively!(expected_response)
-      assert_equal(expected_response, JSON.decode(response.body))
+      assert_equal expected_response, JSON.decode(response.body)
       assert_response :success
       assert_equal 'application/json', response.content_type
     end
 
+    def assert_json_failure(expected_reason)
+      res = JSON.decode(response.body)
+      assert_equal res['success'], false
+      assert_equal res['errors'][0]['reason'], expected_reason if res['errors'][0]
+    end
+
     def generate_token(user)
       post api_v1_authenticate_path, json_request_data({
-        email: user.email
-        password: user.password_digest
+        email: user.email,
+        password: 'password'
       })
-      JSON.decode(response.body)["token"]
+      JSON.decode(response.body)['data']['token']
     end
   end
 end

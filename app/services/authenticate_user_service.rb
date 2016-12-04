@@ -5,9 +5,9 @@ class AuthenticateUserService < ApplicationService
 
 	def action
 		if user
-			Success.new(token: JsonWebToken.encode(user_id: user.id))
+			Success.new token: JsonWebToken.encode(user_id: user.id)
 		else
-			Failure.new(user: 'Invalid credentials')
+			Failure.new(errors: {auth: 'Invalid credentials'})
 		end
 	end
 

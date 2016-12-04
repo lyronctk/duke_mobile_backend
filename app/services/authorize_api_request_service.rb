@@ -1,15 +1,17 @@
 class AuthorizeApiRequestService < ApplicationService
-	include ActiveAttr::Model
-	attribute :headers
+	attr_reader :headers
+
+	def initialize(headers={})
+		@headers = headers
+	end
 
 	def action
-		return Failure.new(auth: 'Missing token') unless headers['Authorization'].present?
-
-		user = User.find(decoded_auth_token[:user_id])
+		return Failure.new(errors: {auth: 'Missing token'}) unless headers['Authorization'].present?
+		user = User.find(decoded_auth_token[:user_id]) if decoded_auth_token
 		if user
-			Success.new(user: user)
+			Success.new user: user
 		else 
-			Failure.new(auth: 'Invalid token')
+			Failure.new(errors: {auth: 'Invalid token'})
 		end 	
 	end
 

@@ -5,7 +5,7 @@ module Api
     	skip_before_action :authenticate_request, only: [:authenticate]
 
       def update_password
-        render_service UpdatePasswordService.new(params[:data])
+        render_service UpdatePasswordService.new params_with_user(params[:data])
       end
 
       def authenticate
