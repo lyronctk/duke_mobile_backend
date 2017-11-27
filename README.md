@@ -1,6 +1,6 @@
 # Duke Mobile Backend
 
-### *Helped in the development of a back end for Duke University (Sophomore year - High school). Utilizes JSON format, http requests, CRUD operations, etc.
+### *Helped in the development of a back end for Duke University (Sophomore year - High school). Utilizes JSON format, http requests, CRUD operations, authentication tokens, etc.
 
 ### Reponse Formats
 
