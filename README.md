@@ -1,14 +1,6 @@
 # Duke Mobile Backend
 
-## First Task
-
-rails g model Record user:references schema:string use_case:string data:json
-
-    Read: GET /api/v1/users/:user_id/records/:record_id
-    Read All: GET /api/v1/users/:user_id/records?query_params
-    Delete: DELETE /api/v1/users/:user_id/records/:record_id
-    Create: POST /api/v1/users/:user_id/records
-    Update: PATCH /api/v1/users/:user_id/records/:record_id
+### Helped in the development of a back end for Duke University (Sophomore year - High school). Ruby on Rails
 
 ### Reponse Formats
 
