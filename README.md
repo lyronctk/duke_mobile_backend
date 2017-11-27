@@ -1,6 +1,6 @@
 # Duke Mobile Backend
 
-### Helped in the development of a back end for Duke University (Sophomore year - High school). Ruby on Rails
+### *Helped in the development of a back end for Duke University (Sophomore year - High school). Ruby on Rails
 
 ### Reponse Formats
 
